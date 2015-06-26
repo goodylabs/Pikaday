@@ -7,8 +7,8 @@
     "calendar",
     "date"
   ],
-  "homepage": "http://dbushell.github.io/Pikaday/",
-  "bugs": "https://github.com/dbushell/Pikaday/issues",
+  "homepage": "http://github.com/goodylabs/Pikaday",
+  "bugs": "https://github.com/goodylabs/Pikaday/issues",
   "licenses": [
     {
       "type": "BSD",
