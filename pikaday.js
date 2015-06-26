@@ -281,8 +281,11 @@
             return '<td class="is-empty"></td>';
         }
         var arr = [];
-        if (opts.showDaysInNextAndPreviousMonths) {
+        if (opts.otherMonth) {
             arr.push('is-in-other-month');
+        }
+        if (opts.currenMonth) {
+            arr.push('current-month');
         }
         if (opts.isDisabled) {
             arr.push('is-disabled');
@@ -996,21 +999,21 @@
                                  (opts.maxDate && day > opts.maxDate) ||
                                  (opts.disableWeekends && isWeekend(day)) ||
                                  (opts.disableDayFn && opts.disableDayFn(day)),
-                    dayNumber = 1 + (i - before);
+                    dayNumber = 1 + (i - before),
+                    isEmpty = i < before || i >= (days + before),
+                    currentMonth = true,
+                    otherMonth = false;
 
-                if (!opts.showDaysInNextAndPreviousMonths) {
-                    var isEmpty = i < before || i >= (days + before);
-                }
-                else {
-                    var isEmpty = false;
-                }
-
-                if (isEmpty) {
+                if (isEmpty && opts.showDaysInNextAndPreviousMonths) {
                     if (i < before) {
                         dayNumber = daysInPreviousMonth + dayNumber;
                     } else {
                         dayNumber = dayNumber - days;
                     }
+
+                    isEmpty = false;
+                    var otherMonth = true,
+                        currentMonth = false;
                 }
 
                 var dayConfig = {
@@ -1024,7 +1027,8 @@
                         isStartRange: isStartRange,
                         isEndRange: isEndRange,
                         isInRange: isInRange,
-                        showDaysInNextAndPreviousMonths: opts.showDaysInNextAndPreviousMonths
+                        otherMonth: otherMonth,
+                        currentMonth: currentMonth
                     };
 
 
